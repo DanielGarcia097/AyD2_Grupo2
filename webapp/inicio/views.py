@@ -5,4 +5,4 @@ from django.views.generic import TemplateView
 
 
 class index(TemplateView):
-    template_name = 'inicio/vista.html'
+    template_name = 'inicio/page-login.html'
