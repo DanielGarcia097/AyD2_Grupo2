@@ -6,7 +6,7 @@ urlpatterns = [
     
     #URL Login
 
-    url('inicio/$', views.manual),
-    url('inicio/login$', views.inicio_sesion),    
-
+    url('inicio_sesion/$', views.inicio_sesion),
+    url('carga_datos/$', views.carga_datos),    
+    url('inicio/$', views.inicio),    
 ]
