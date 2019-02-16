@@ -25,8 +25,10 @@ SECRET_KEY = 'z_+$s+iqes&68#6yg%e!zazl-=+^$h21h95-p8p(a66i0)!f&z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.73.93.202']
+ALLOWED_HOSTS = ['34.73.93.202','localhost']
 
+from unipath import Path
+RUTA_PROYECTO = Path(__file__).ancestor(2)
 
 # Application definition
 
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'inicio',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +57,7 @@ ROOT_URLCONF = 'django_environments.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [RUTA_PROYECTO.child('templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -62,6 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
             ],
         },
     },
@@ -115,7 +120,17 @@ USE_L10N = True
 USE_TZ = True
 
 
+#MEDIA ROOT URL (SE ALOJAN TODAS LAS IMAGENES.)
+MEDIA_ROOT = RUTA_PROYECTO.child('media')
+
+MEDIA_URL = '/media/'
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    RUTA_PROYECTO.child('static'),
+]
