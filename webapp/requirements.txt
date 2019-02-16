@@ -1,0 +1,4 @@
+django==2.1.7
+django-rest-framework-mongoengine==3.3.1
+djongo==1.2.31
+pymongo==3.7.2
