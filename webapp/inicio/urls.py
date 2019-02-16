@@ -1,11 +1,12 @@
-from django.urls import path
-from .views import index
+from django.conf.urls import url
+from . import views
 
 
 urlpatterns = [
     
     #URL Login
 
-    path('inicio/', index.as_view(), name = 'vista'),
+    url('inicio/$', views.manual),
+    url('inicio/login$', views.inicio_sesion),    
 
 ]
