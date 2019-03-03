@@ -85,3 +85,5 @@ def CrearTransaccion(CuentaOrigen,CuentaDestino,DebitoCredito,Monto,Descripcion)
     return trx
 
 
+def PracticaAnalisis(request):
+    return render(request, 'transacciones/analisis.html')
