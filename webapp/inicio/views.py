@@ -11,7 +11,7 @@ from django.http import HttpResponseRedirect
 
 # Create your views here.
 
-
+#Codigo destinado a la carga de datos iniciales de la aplicación.
 def carga_datos(request):
     n = Cuenta()
     n.id = 1
@@ -52,13 +52,16 @@ def carga_datos(request):
     DatosCargados = Cuenta.objects.count()
     return  HttpResponse("Carga de Datos: " + str(DatosCargados))  
 
+
+#LOGIN.
+#--
+#Vista de login de la aplicación.
 @csrf_exempt
 def inicio(request):
     template_name = 'inicio/page-login.html'
     return render(request, template_name)
 
-
-
+#Vista de validación de login de la aplicación.
 @csrf_exempt
 def inicio_sesion(request):
     if request.method == 'POST':
@@ -69,12 +72,12 @@ def inicio_sesion(request):
         existe = Cuenta.objects.filter(usuario=email,password=password).exists()
         if existe == True:
             Logueado = Cuenta.objects.get(usuario=email,password=password)
-            template_name = 'inicio/estado_cuenta.html'
+            template_name = 'usuario/home.html'
             return render(request, template_name,{'persona': Logueado})
         else:
             return HttpResponseRedirect('/inicio')
 
     else:
         return HttpResponseRedirect('/inicio')
-
+#--
 

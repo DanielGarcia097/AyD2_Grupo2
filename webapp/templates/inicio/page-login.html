@@ -34,7 +34,7 @@
 								<p class="lead">Login to your account</p>
 							</div>
 							{% block content %}
-								<form class="form-auth-small" action="/inicio_sesion/" method="POST">{% csrf_token %}
+								<form class="form-auth-small" action="/usuario/inicio_sesion/" method="POST">{% csrf_token %}
 									<div class="form-group">
 										<label for="signin-email" class="control-label sr-only">Email</label>
 										<input type="text" name="email" class="form-control" id="signin-email" value="holagamboa" placeholder="User Name">

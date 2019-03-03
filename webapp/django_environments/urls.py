@@ -21,4 +21,7 @@ urlpatterns = [
 
     #App Inicio
     path('',include('inicio.urls')),
+
+    #App Usuario
+    path('usuario',include('usuario.urls')),
 ]
