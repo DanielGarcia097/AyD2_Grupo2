@@ -1,4 +1,5 @@
 from django.shortcuts import render
+<<<<<<< HEAD
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -85,3 +86,12 @@ def CrearTransaccion(CuentaOrigen,CuentaDestino,DebitoCredito,Monto,Descripcion)
     return trx
 
 
+=======
+from django.views.decorators.csrf import csrf_exempt
+
+# Create your views here.
+@csrf_exempt
+def deposito(request):
+    template_name = 'transacciones/deposito.html'
+    return render(request, template_name)
+>>>>>>> 22244073e9a9184c4607b01dcd69bdd5770ddb8d
