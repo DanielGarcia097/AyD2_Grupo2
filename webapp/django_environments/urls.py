@@ -24,4 +24,7 @@ urlpatterns = [
 
     #App Usuario
     path('usuario',include('usuario.urls')),
+
+    #App Transacciones
+    path('transaccion',include('transacciones.urls')),
 ]
