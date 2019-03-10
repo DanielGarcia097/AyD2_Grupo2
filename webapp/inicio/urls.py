@@ -2,6 +2,7 @@ from django.conf.urls import url
 from inicio.views import carga_datos
 from inicio.views import inicio
 from transacciones.views import inicio_transacciones,RealizarTransacciones,HistorialTransacciones,VerHistorialCuenta,PracticaAnalisis
+from usuario.views import AdministrarServicios, AgregarServicio, VerServiciosBancarios, AgregarCuntasBancarias,VerCuentasBancarias,AgregarCuentaMostrarTemplate
 #from transacciones import views
 
 
@@ -15,5 +16,11 @@ urlpatterns = [
     url('HistorialTransacciones/$', HistorialTransacciones),
     url('VerHistorialCuenta/$', VerHistorialCuenta),
     url('PracticaAnalisis/$', PracticaAnalisis),
-  
+    url('AdministrarServicios/$', AdministrarServicios ),    
+    url('AgregarServicio/$', AgregarServicio),    
+    url('VerServiciosBancarios/$', VerServiciosBancarios),
+    url('AgregarCuntasBancarias/$', AgregarCuntasBancarias),
+    url('VerCuentasBancarias/$', VerCuentasBancarias),
+    url('AgregarCuentaMostrarTemplate/$', AgregarCuentaMostrarTemplate),
+
 ]

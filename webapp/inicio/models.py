@@ -18,7 +18,8 @@ class Usuario(models.Model):
     password = models.CharField(max_length=150)
     direccion = models.CharField(max_length=150)
     telefono = models.IntegerField()        
-    Fecha_Creacion = models.DateField()
+    Fecha_Creacion = models.DateField(null=True)
+    FechaFin = models.DateField(null=True)
     def __str__(self):
         return self.usuario
 
@@ -26,6 +27,8 @@ class CuentaBancaria(models.Model):
     NumeroCuentaBancaria = models.IntegerField(primary_key=True)
     UsuarioPropietario = models.ForeignKey(Usuario,related_name='CuentaBancariaUsuario', on_delete=models.CASCADE)
     saldo = models.DecimalField(max_digits=8, decimal_places=4)
+    FechaInicio = models.DateField(null=True)
+    FechaFin = models.DateField(null=True)    
     def __str__(self):
         return self.UsuarioPropietario
 
@@ -34,6 +37,8 @@ class ServiciosBancarios(models.Model):
     Usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     NumeroCuentaBancaria = models.ForeignKey(CuentaBancaria, on_delete=models.CASCADE)
     NombreServicio = models.CharField(max_length=150)
+    FechaInicio = models.DateField(null=True)
+    FechaFin = models.DateField(null=True)        
     def __str__(self):
         return self.NombreServicio
 
@@ -45,6 +50,6 @@ class Transaccion(models.Model):
     DebitoCredito = models.IntegerField() ##  5 = Debito (Se agrega a cuenta) | 0 = Credito (Se quita a cuenta)
     Monto = models.DecimalField(max_digits=8, decimal_places=4)
     Decripcion = models.CharField(max_length=150)
-    FechaTransaccion = models.DateField()
+    FechaTransaccion = models.DateField(null=True)
     def __str__(self):
         return self.CuentaOrigen

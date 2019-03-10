@@ -57,10 +57,24 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="#" class="active"><i class="lnr lnr-home"></i> <span>Cuentas</span></a></li>
-						<li><a href="/transacciones" class=""><i class="lnr lnr-code"></i> <span>Realizar Transaccion</span></a></li>
-						<li><a href="charts.html" class=""><i class="lnr lnr-chart-bars"></i> <span>Servicios</span></a></li>
-						<li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Perfil</span></a></li>
+						<li>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Adm Servicios</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages" class="collapse ">
+								<ul class="nav">
+									<li><a href="/VerServiciosBancarios" class="">Ver Servicios</a></li>
+									<li><a href="/AdministrarServicios" class="">Agregar</a></li>
+								</ul>
+							</div>
+						</li>	
+						<li>
+							<a href="#subPages2" data-toggle="collapse" class="collapsed"><i class="lnr lnr-chart-bars"></i> <span>Adm Cuentas</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages2" class="collapse ">
+								<ul class="nav">
+									<li><a href="/VerCuentasBancarias" class="">Ver Cuentas</a></li>
+									<li><a href="/AgregarCuentaMostrarTemplate" class="">Agregar Cuentas</a></li>
+								</ul>
+							</div>
+						</li>
 					</ul>
 				</nav>
 			</div>
@@ -71,62 +85,62 @@
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<h3 class="page-title">{{persona.Nombre}} {{persona.Apellido}}</h3>
+					<h3 class="page-title"> ADMINISTRADOR: {{persona.Nombre}} {{persona.Apellido}}</h3>
 					<div class="row">
 						<div class="col-md-12">
-							<!-- PANEL HEADLINE -->
-							<div class="panel panel-headline">
-								<div class="panel-body">
-									<!-- RECENT PURCHASES -->
-									<div class="panel">
-											<div class="panel-heading">
-												<h3 class="panel-title">Cuentas Bancarias</h3>
-												<div class="right">
-													<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-													<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
-												</div>
-											</div>
-											<div class="panel-body no-padding">
-												<table class="table table-striped">
-													<thead>
-														<tr>
-															<th>Numero Cuenta</th>
-															<th>Moneda</th>
-															<th>Saldo</th>
-															<th></th>
-														</tr>
-													</thead>
-													<tbody>
-														{% block title %}
-															{% for cuenta in Cuentas %}
-																<tr>
-																	<td><a href="#">{{ cuenta.NumeroCuentaBancaria }}</a></td>
-																	<td>QTZ</td>
-																	<td>{{cuenta.saldo}}</td>																	
-																	<td>																	
-																		<form   action="/VerHistorialCuenta/" method="POST">{% csrf_token %}
-																			<input name="cuenta" value="{{cuenta.NumeroCuentaBancaria}}" style="visibility:hidden"  type="text">
-																			<span><button class="btn btn-success" type="submit">Ver Historial</button></span>
-																		</form>
-																	</td>
-																</tr>
-															{% endfor %}
-														{% endblock %}
-													</tbody>
-												</table>
-											</div>
-											<div class="panel-footer">
-												<div class="row">
-													<div class="col-md-6"><span class="panel-note"><i class="fa fa-clock-o"></i> Last 24 hours</span></div>
-													<div class="col-md-6 text-right"><a href="#" class="btn btn-primary">View All Purchases</a></div>
-												</div>
-											</div>
-										</div>
-										<!-- END RECENT PURCHASES -->
 
+							<!-- PANEL HEADLINE -->
+							<form id="FormularioServicios" class="panel panel-headline" action="/AgregarServicio/" method="POST">{% csrf_token %}
+								<!-- INPUTS -->
+								{% block title %}
+								<div class="panel">
+									<div class="panel-heading">
+										<h3 class="panel-title">Administrar Servicios Bancarios</h3>
+									</div>
+									<div class="panel-body">
+										<br>
+										<a>Usuario Autenticacion de Administrador del Servicio Bancario<span class="badge"></span></a>
+										<br>
+										<br>					
+										<input type="text" name="UsuarioAdmin"  class="form-control" placeholder="Example: AdminUSAC">
+										<br>
+										<a>Nombre Del Servicio Bancario<span class="badge"></span></a>
+										<br>
+										<br>					
+										<input type="text" name="NombreServicioBancario"  class="form-control" placeholder="Example: Pagos Usac">										
+										<br>
+										<a>Descripcion Del Servicio Bancario<span class="badge"></span></a>
+										<br>
+										<br>										
+										<input type="text" name="DescripcionServicioBancario"  class="form-control" placeholder="Example: Pagos Estudiantiles">										
+										<br>
+										<a>Ubicacion Servicio Bancario<span class="badge"></span></a>
+										<br>
+										<br>
+										<input type="text" name="UbicacionServicio"  class="form-control" placeholder="Example: Ciudad Universitaria">										
+										<br>
+										<a>Telefon Servicio Bancario<span class="badge"></span></a>
+										<br>
+										<br>
+										<input type="text" name="TelefonoServicio"  class="form-control" placeholder="Example: 578934125">										
+
+										<br>
+										<a>Digitar Contrasena de Usuario que Administrara Cuenta <span class="badge"></span></a>
+										<br>
+										<br>
+										<div class="form-group">
+											<input type="password" name="password"  class="form-control" id="signin-password"  placeholder="Password">
+										</div>										
+										<button type="submit" class="btn btn-primary btn-lg btn-block">Guardar Servicio Bancario</button>
+									</div>
+									{% endblock %}
 								</div>
-							</div>
+								<!-- END INPUTS -->
+							</form>
 							<!-- END PANEL HEADLINE -->
+
+
+
 						</div>
 					</div>
 				</div>

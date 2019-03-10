@@ -4,6 +4,26 @@ $(document).ready(function() {
 	/*	TOP NAVIGATION AND LAYOUT
 	/*----------------------------------*/
 
+	$('#FormularioTransaccion').submit(function(e){
+		e.preventDefault();
+		
+		$.ajax({			
+			url: $('#FormularioTransaccion').attr('action'),
+			type: $('#FormularioTransaccion').attr('method'),
+			data: $('#FormularioTransaccion').serialize(),
+
+			success: function(json){
+				//console.log(json.message)
+				alert(json.message);
+				location.href ="/usuario/inicio_sesion/";	
+			},
+			error: function() {
+				console.log("No se ha podido obtener la información");
+			}			
+		})
+	})
+		
+
 	$('.btn-toggle-fullwidth').on('click', function() {
 		if(!$('body').hasClass('layout-fullwidth')) {
 			$('body').addClass('layout-fullwidth');

@@ -75,6 +75,9 @@ def inicio_sesion(request):
         request.session['usuario'] = email
         request.session['password'] = password
         CuentasBancarias    = CuentaBancaria.objects.all().filter(UsuarioPropietario=id_usuario)       
+        #validacion si es usuario administrador
+        if email == 'ggamboac':
+            return  HttpResponseRedirect('/VerServiciosBancarios')       
         template_name       = 'usuario/home.html'
         return render(request, template_name,{'persona': Logueado, 'Cuentas': CuentasBancarias})        
 
@@ -90,6 +93,9 @@ def inicio_sesion(request):
             request.session['usuario']  = email
             request.session['password'] = password
             CuentasBancarias    = CuentaBancaria.objects.all().filter(UsuarioPropietario=id_usuario)            
+            #Validacion usuario administrador
+            if email == 'ggamboac':
+                return  HttpResponseRedirect('/VerServiciosBancarios')
             template_name       = 'usuario/home.html'
             return render(request, template_name,{'persona': Logueado, 'Cuentas': CuentasBancarias})
         else:
@@ -113,12 +119,14 @@ def CrearUsuarios( usuario, password, nombre, apellido, direccion,telefono):
     ct1.NumeroCuentaBancaria = randint(1000000, 9000000) 
     ct1.UsuarioPropietario = usr8
     ct1.saldo = 50
+    ct1.FechaInicio = timezone.now()
     ct1.save()
 
     ct2 = CuentaBancaria()
     ct2.NumeroCuentaBancaria = randint(1000000, 9000000) 
     ct2.UsuarioPropietario = usr8
     ct2.saldo = 835
+    ct2.FechaInicio = timezone.now()
     ct2.save()    
 
     return ct1
@@ -128,6 +136,7 @@ def CrearServicios():
     srv1.id = randint(1000000, 9000000)
     srv1.NumeroCuentaBancaria = CrearUsuarios('calusac','admin','Calusac','Centro Estudios','USAC',59377035)
     srv1.NombreServicio = 'Centro Estudio Lenguas'
+    srv1.FechaInicio = timezone.now()
     srv1.save()
 
 

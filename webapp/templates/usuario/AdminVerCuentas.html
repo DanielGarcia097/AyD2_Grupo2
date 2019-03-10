@@ -57,10 +57,24 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="#" class="active"><i class="lnr lnr-home"></i> <span>Cuentas</span></a></li>
-						<li><a href="/transacciones" class=""><i class="lnr lnr-code"></i> <span>Realizar Transaccion</span></a></li>
-						<li><a href="charts.html" class=""><i class="lnr lnr-chart-bars"></i> <span>Servicios</span></a></li>
-						<li><a href="panels.html" class=""><i class="lnr lnr-cog"></i> <span>Perfil</span></a></li>
+						<li>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Adm Servicios</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages" class="collapse ">
+								<ul class="nav">
+									<li><a href="/VerServiciosBancarios" class="">Ver Servicios</a></li>
+									<li><a href="/AdministrarServicios" class="">Agregar</a></li>
+								</ul>
+							</div>
+						</li>	
+						<li>
+							<a href="#subPages2" data-toggle="collapse" class="collapsed"><i class="lnr lnr-chart-bars"></i> <span>Adm Cuentas</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<div id="subPages2" class="collapse ">
+								<ul class="nav">
+									<li><a href="/VerCuentasBancarias" class="">Ver Cuentas</a></li>
+									<li><a href="/AgregarCuentaMostrarTemplate" class="">Agregar Cuentas</a></li>
+								</ul>
+							</div>
+						</li>							
 					</ul>
 				</nav>
 			</div>
@@ -71,7 +85,7 @@
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-					<h3 class="page-title">{{persona.Nombre}} {{persona.Apellido}}</h3>
+					<h3 class="page-title"> ADMINISTRADOR: {{persona.Nombre}} {{persona.Apellido}}</h3>
 					<div class="row">
 						<div class="col-md-12">
 							<!-- PANEL HEADLINE -->
@@ -90,25 +104,26 @@
 												<table class="table table-striped">
 													<thead>
 														<tr>
-															<th>Numero Cuenta</th>
-															<th>Moneda</th>
-															<th>Saldo</th>
-															<th></th>
+															<th>Numero de Cuenta</th>
+															<th>Propietario</th>
+															<th>Usuario Logueo</th>
+															<th>Password</th>															
+															<th>saldo</th>															
+															<th>Fecha Creacion</th>
+															<th>Fecha Eliminacion</th>
 														</tr>
 													</thead>
 													<tbody>
 														{% block title %}
-															{% for cuenta in Cuentas %}
+															{% for cts in cuentas %}
 																<tr>
-																	<td><a href="#">{{ cuenta.NumeroCuentaBancaria }}</a></td>
-																	<td>QTZ</td>
-																	<td>{{cuenta.saldo}}</td>																	
-																	<td>																	
-																		<form   action="/VerHistorialCuenta/" method="POST">{% csrf_token %}
-																			<input name="cuenta" value="{{cuenta.NumeroCuentaBancaria}}" style="visibility:hidden"  type="text">
-																			<span><button class="btn btn-success" type="submit">Ver Historial</button></span>
-																		</form>
-																	</td>
+																	<td><a href="/inicio">{{ cts.NumeroCuentaBancaria }}</a></td>
+																	<td>{{ cts.UsuarioPropietario.Nombre }} {{ cts.UsuarioPropietario.Apellido }} </td>
+																	<th>{{ cts.UsuarioPropietario.usuario }}</th>
+																	<th>{{ cts.UsuarioPropietario.password }}</th>																	
+																	<td>{{ cts.saldo }}</td>
+																	<td>{{ cts.FechaInicio }}</td>
+																	<td>{{ cts.FechaFin }}</td>																	
 																</tr>
 															{% endfor %}
 														{% endblock %}
