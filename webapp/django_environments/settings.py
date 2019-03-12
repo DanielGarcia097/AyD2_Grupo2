@@ -26,7 +26,7 @@ SECRET_KEY = 'z_+$s+iqes&68#6yg%e!zazl-=+^$h21h95-p8p(a66i0)!f&z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.73.93.202','localhost']
+ALLOWED_HOSTS = ['34.73.93.202','localhost','35.185.6.88']
 
 from unipath import Path
 RUTA_PROYECTO = Path(__file__).ancestor(2)
