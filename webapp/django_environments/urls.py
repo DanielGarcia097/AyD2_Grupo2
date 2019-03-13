@@ -24,7 +24,4 @@ urlpatterns = [
 
     #App Usuario
     path('usuario',include('usuario.urls')),
-
-    #Debug
-    path(r'^__debug__',include(debug_toolbar.urls)),
 ]
