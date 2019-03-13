@@ -11,7 +11,7 @@ from .models import Cuenta,Usuario,CuentaBancaria,ServiciosBancarios,Transaccion
 from django.utils import timezone
 from random import randint
 from django.template import RequestContext
-
+import cProfile, pstats, sys
 # Create your views here.
 
 #Codigo destinado a la carga de datos iniciales de la aplicación.
@@ -66,7 +66,9 @@ def inicio(request):
 
 #Vista de validación de login de la aplicación.
 @csrf_exempt
-def inicio_sesion(request):     
+def inicio_sesion(request):  
+    pr = cProfile.Profile()
+    pr.enable()   
     if request.session.get('usuario') and request.session.get('password'):
         email       = request.session['usuario']
         password    = request.session['password']
@@ -77,14 +79,26 @@ def inicio_sesion(request):
         CuentasBancarias    = CuentaBancaria.objects.all().filter(UsuarioPropietario=id_usuario)       
         #validacion si es usuario administrador
         if email == 'ggamboac':
+            ps = pstats.Stats(pr, stream=sys.stdout)
+            ps.print_stats()
+            pr.disable()
+            pr.dump_stats('profile1.prof')
             return  HttpResponseRedirect('/VerServiciosBancarios')       
         template_name       = 'usuario/home.html'
+        ps = pstats.Stats(pr, stream=sys.stdout)
+        ps.print_stats()
+        pr.disable()
+        pr.dump_stats('profile1.prof')
         return render(request, template_name,{'persona': Logueado, 'Cuentas': CuentasBancarias})        
 
     if request.method == 'POST':
         email       = request.POST.get("email")
         password    = request.POST.get("password")
         if email is "" or password is  "":
+            ps = pstats.Stats(pr, stream=sys.stdout)
+            ps.print_stats()
+            pr.disable()
+            pr.dump_stats('profile1.prof')
             return HttpResponseRedirect('/inicio')
         existe = Usuario.objects.filter(usuario=email,password=password).exists()
         if existe == True:
@@ -95,13 +109,30 @@ def inicio_sesion(request):
             CuentasBancarias    = CuentaBancaria.objects.all().filter(UsuarioPropietario=id_usuario)            
             #Validacion usuario administrador
             if email == 'ggamboac':
+                ps = pstats.Stats(pr, stream=sys.stdout)
+                ps.print_stats()
+                pr.disable()
+                pr.dump_stats('profile1.prof')
                 return  HttpResponseRedirect('/VerServiciosBancarios')
             template_name       = 'usuario/home.html'
+            ps = pstats.Stats(pr, stream=sys.stdout)
+            ps.print_stats()
+            pr.disable()
+            pr.dump_stats('profile1.prof')
             return render(request, template_name,{'persona': Logueado, 'Cuentas': CuentasBancarias})
         else:
+            ps = pstats.Stats(pr, stream=sys.stdout)
+            ps.print_stats()
+            pr.disable()
+            pr.dump_stats('profile1.prof')
             return HttpResponseRedirect('/inicio')
     else:
+        ps = pstats.Stats(pr, stream=sys.stdout)
+        ps.print_stats()
+        pr.disable()
+        pr.dump_stats('profile1.prof')
         return HttpResponseRedirect('/inicio')
+    
 
 def CrearUsuarios( usuario, password, nombre, apellido, direccion,telefono):
     usr8            = Usuario()
