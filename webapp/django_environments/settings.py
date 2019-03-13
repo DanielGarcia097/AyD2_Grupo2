@@ -26,7 +26,7 @@ SECRET_KEY = 'z_+$s+iqes&68#6yg%e!zazl-=+^$h21h95-p8p(a66i0)!f&z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['34.73.93.202','localhost','35.185.6.88']
 
 from unipath import Path
 RUTA_PROYECTO = Path(__file__).ancestor(2)
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'inicio',
     'transacciones',
     'usuario',
-    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +53,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 
 ]
 
@@ -139,22 +137,4 @@ STATIC_URL = '/assets/'
 
 STATICFILES_DIRS = [
     RUTA_PROYECTO.child('assets'),
-]
-
-INTERNAL_IPS = ['34.73.93.202','localhost','35.185.6.88']
-
-DEBUG_TOOLBAR_PANELS = [
-    'debug_toolbar.panels.versions.VersionsPanel',
-    'debug_toolbar.panels.timer.TimerPanel',
-    'debug_toolbar.panels.settings.SettingsPanel',
-    'debug_toolbar.panels.headers.HeadersPanel',
-    'debug_toolbar.panels.request.RequestPanel',
-    'debug_toolbar.panels.sql.SQLPanel',
-    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-    'debug_toolbar.panels.templates.TemplatesPanel',
-    'debug_toolbar.panels.cache.CachePanel',
-    'debug_toolbar.panels.signals.SignalsPanel',
-    'debug_toolbar.panels.logging.LoggingPanel',
-    'debug_toolbar.panels.redirects.RedirectsPanel',
-    'debug_toolbar.panels.profiling.ProfilingPanel',
 ]
