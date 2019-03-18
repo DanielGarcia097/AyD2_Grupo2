@@ -17,7 +17,7 @@ urlpatterns = [
     url('VerHistorialCuenta/$', VerHistorialCuenta),
     url('PracticaAnalisis/$', PracticaAnalisis),
     url('AdministrarServicios/$', AdministrarServicios ),    
-    url('AgregarServicio/$', AgregarServicio),    
+    url('AgregarServicio/$', AgregarServicio),
     url('VerServiciosBancarios/$', VerServiciosBancarios),
     url('AgregarCuntasBancarias/$', AgregarCuntasBancarias),
     url('VerCuentasBancarias/$', VerCuentasBancarias),

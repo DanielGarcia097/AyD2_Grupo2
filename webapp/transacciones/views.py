@@ -4,11 +4,13 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from inicio.models import Usuario, CuentaBancaria,Transaccion
+from django.views.decorators.csrf import csrf_exempt
 import json
 from django.utils import timezone
 from random import randint
 # Create your views here.
 
+@csrf_exempt
 def inicio_transacciones(request):
     if request.session.get('usuario'):
         email       = request.session['usuario']
@@ -20,6 +22,7 @@ def inicio_transacciones(request):
     else:
         return  HttpResponseRedirect('/inicio')     
 
+@csrf_exempt
 def RealizarTransacciones(request):
     if request.session.get('usuario'):
         email       = request.session['usuario']
@@ -71,6 +74,7 @@ def RealizarTransacciones(request):
         response_data['message'] = 'Error de Autenticacion'
         return HttpResponse(json.dumps(response_data), content_type="application/json")
 
+@csrf_exempt
 def VerHistorialCuenta(request):
     if request.method == 'POST':
         cuenta        = request.POST.get("cuenta")

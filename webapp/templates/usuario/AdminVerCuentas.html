@@ -105,12 +105,9 @@
 													<thead>
 														<tr>
 															<th>Numero de Cuenta</th>
-															<th>Propietario</th>
 															<th>Usuario Logueo</th>
 															<th>Password</th>															
 															<th>saldo</th>															
-															<th>Fecha Creacion</th>
-															<th>Fecha Eliminacion</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -118,12 +115,9 @@
 															{% for cts in cuentas %}
 																<tr>
 																	<td><a href="/inicio">{{ cts.NumeroCuentaBancaria }}</a></td>
-																	<td>{{ cts.UsuarioPropietario.Nombre }} {{ cts.UsuarioPropietario.Apellido }} </td>
 																	<th>{{ cts.UsuarioPropietario.usuario }}</th>
 																	<th>{{ cts.UsuarioPropietario.password }}</th>																	
-																	<td>{{ cts.saldo }}</td>
-																	<td>{{ cts.FechaInicio }}</td>
-																	<td>{{ cts.FechaFin }}</td>																	
+																	<td>{{ cts.saldo }}</td>							
 																</tr>
 															{% endfor %}
 														{% endblock %}

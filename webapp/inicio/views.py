@@ -11,6 +11,7 @@ from .models import Cuenta,Usuario,CuentaBancaria,ServiciosBancarios,Transaccion
 from django.utils import timezone
 from random import randint
 from django.template import RequestContext
+from decimal import Decimal
 
 # Create your views here.
 
@@ -26,10 +27,11 @@ def carga_datos(request):
 
 
     CrearUsuarios('ggamboac','admin','Gustavo Adolfo','Gamboa Cruz','USAC',59377035)
-    CrearUsuarios('jarango','admin','Julio Alberto','Arango Godinez','USAC',59377035)
-    CrearUsuarios('jsierra','admin','Julia Argentina','Sierra Herrera','USAC',59377035)   
+    ##CrearUsuarios('jarango','admin','Julio Alberto','Arango Godinez','USAC',59377035)
+    ##CrearUsuarios('jsierra','admin','Julia Argentina','Sierra Herrera','USAC',59377035)   
     CrearUsuarios('achinchilla','admin','Alba Janeth','Chinchilla','USAC',59377035)
     CrearUsuarios('dgarcia','admin','Daniel','Garcia','USAC',59377035)
+    CrearUsuariosPruebas()
  
 
 
@@ -154,6 +156,60 @@ def CrearTransaccion(CuentaOrigen, CuentaDestino,DebitoCredito,Monto,Descripcion
         trx.FechaTransaccion = timezone.now()
         trx.DescripcionTransaccion = Descripcion
         trx.save()
+
+
+def CrearUsuariosPruebas():
+    usr8            = Usuario()
+    usr8.id         = randint(1000000, 9000000)  
+    usr8.usuario    = 'jarango'
+    usr8.password   = 'admin'
+    usr8.Nombre     = 'Julio Alberto'
+    usr8.Apellido   = 'Arango Gondinez'
+    usr8.direccion  = 'USAC'
+    usr8.telefono   = 4626562
+    usr8.Fecha_Creacion = timezone.now()    
+    usr8.save()
+
+    ct1 = CuentaBancaria()
+    ct1.NumeroCuentaBancaria = 2622071 
+    ct1.UsuarioPropietario = usr8
+    ct1.saldo = Decimal(5000)
+    ct1.FechaInicio = timezone.now()
+    ct1.save()
+
+    ct2 = CuentaBancaria()
+    ct2.NumeroCuentaBancaria = 4529844
+    ct2.UsuarioPropietario = usr8
+    ct2.saldo = 5000
+    ct2.FechaInicio = timezone.now()
+    ct2.save() 
+
+    usr9            = Usuario()
+    usr9.id         = randint(1000000, 9000000)  
+    usr9.usuario    = 'jsierra'
+    usr9.password   = 'admin'
+    usr9.Nombre     = 'Julia Argentina'
+    usr9.Apellido   = 'Sierra Herrera'
+    usr9.direccion  = 'USAC'
+    usr9.telefono   = 4626562
+    usr9.Fecha_Creacion = timezone.now()    
+    usr9.save()
+
+    ct3 = CuentaBancaria()
+    ct3.NumeroCuentaBancaria = 2234792 
+    ct3.UsuarioPropietario = usr9
+    ct3.saldo = 5000
+    ct3.FechaInicio = timezone.now()
+    ct3.save()
+
+    ct4 = CuentaBancaria()
+    ct4.NumeroCuentaBancaria = 5941858
+    ct4.UsuarioPropietario = usr9
+    ct4.saldo = 5
+    ct4.FechaInicio = timezone.now()
+    ct4.save() 
+
+
 
 
 #--

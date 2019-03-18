@@ -105,10 +105,8 @@
 													<thead>
 														<tr>
 															<th>Servicio</th>
-															<th>Descripcion Servicio</th>
 															<th>Usuario Administrador</th>															
 															<th>Cuenta Bancaria</th>
-															<th>Fecha Creacion</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -116,10 +114,8 @@
 															{% for srv in servicios %}
 																<tr>
 																	<td><a href="/inicio">{{ srv.NumeroCuentaBancaria.UsuarioPropietario.Nombre }}</a></td>
-																	<td>{{ srv.NumeroCuentaBancaria.UsuarioPropietario.Apellido }}</td>
 																	<td>{{ srv.NumeroCuentaBancaria.UsuarioPropietario.usuario }}</td>
 																	<td>{{ srv.NumeroCuentaBancaria.NumeroCuentaBancaria }}</td>
-																	<td>{{ srv.NumeroCuentaBancaria.UsuarioPropietario.Fecha_Creacion }}</td>																	
 																</tr>
 															{% endfor %}
 														{% endblock %}

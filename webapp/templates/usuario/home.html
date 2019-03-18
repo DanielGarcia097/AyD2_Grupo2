@@ -104,7 +104,7 @@
 																	<td>QTZ</td>
 																	<td>{{cuenta.saldo}}</td>																	
 																	<td>																	
-																		<form   action="/VerHistorialCuenta/" method="POST">{% csrf_token %}
+																		<form   action="/VerHistorialCuenta/" method="POST">
 																			<input name="cuenta" value="{{cuenta.NumeroCuentaBancaria}}" style="visibility:hidden"  type="text">
 																			<span><button class="btn btn-success" type="submit">Ver Historial</button></span>
 																		</form>
