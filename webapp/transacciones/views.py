@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from django.utils import timezone
 from random import randint
+import cProfile, pstats, sys
 # Create your views here.
 
 @csrf_exempt
@@ -24,6 +25,8 @@ def inicio_transacciones(request):
 
 @csrf_exempt
 def RealizarTransacciones(request):
+    pr = cProfile.Profile()
+    pr.enable()
     if request.session.get('usuario'):
         email       = request.session['usuario']
         Logueado    = Usuario.objects.get(usuario=email)
@@ -40,6 +43,10 @@ def RealizarTransacciones(request):
                 response_data = {}
                 response_data['result'] = 'Error'
                 response_data['message'] = 'Campos Vacios, Por favor llenar todos los campos'
+                ps = pstats.Stats(pr, stream=sys.stdout)
+                ps.print_stats()
+                pr.disable()
+                pr.dump_stats('profile2.prof')
                 return HttpResponse(json.dumps(response_data), content_type="application/json")
             ##Para realizar una transaccion se realiza en dos operaciones
             ## 1- Se saca de la Cuenta Origen   -> En DebitoCredito se pone 0
@@ -53,25 +60,45 @@ def RealizarTransacciones(request):
                 response_data = {}
                 response_data['result'] = 'Error'
                 response_data['message'] = 'Operacion Realizada Satisfactoriaente!!'
+                ps = pstats.Stats(pr, stream=sys.stdout)
+                ps.print_stats()
+                pr.disable()
+                pr.dump_stats('profile2.prof')
                 return HttpResponse(json.dumps(response_data), content_type="application/json")                
             elif retorno_validacion == 2:
                 response_data = {}
                 response_data['result'] = 'Error'
                 response_data['message'] = 'No se se tiene suficiente saldo para la transaccion'
+                ps = pstats.Stats(pr, stream=sys.stdout)
+                ps.print_stats()
+                pr.disable()
+                pr.dump_stats('profile2.prof')
                 return HttpResponse(json.dumps(response_data), content_type="application/json")
             elif retorno_validacion == 3:
                 response_data = {}
                 response_data['result'] = 'Error'
                 response_data['message'] = 'Error La cuenta Destino no existe'
+                ps = pstats.Stats(pr, stream=sys.stdout)
+                ps.print_stats()
+                pr.disable()
+                pr.dump_stats('profile2.prof')
                 return HttpResponse(json.dumps(response_data), content_type="application/json")
         response_data = {}
         response_data['result'] = 'Error'
         response_data['message'] = 'Error en Operacion'
+        ps = pstats.Stats(pr, stream=sys.stdout)
+        ps.print_stats()
+        pr.disable()
+        pr.dump_stats('profile2.prof')
         return HttpResponse(json.dumps(response_data), content_type="application/json")
     else:
         response_data = {}
         response_data['result'] = 'Error'
         response_data['message'] = 'Error de Autenticacion'
+        ps = pstats.Stats(pr, stream=sys.stdout)
+        ps.print_stats()
+        pr.disable()
+        pr.dump_stats('profile2.prof')
         return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @csrf_exempt
@@ -84,11 +111,23 @@ def VerHistorialCuenta(request):
             Cuenta          = CuentaBancaria.objects.all().filter(NumeroCuentaBancaria=cuenta).last()
             Transacciones   = Transaccion.objects.all().filter(CuentaOrigen=Cuenta)
             template_name   = 'transacciones/HistorialTransacciones.html'
+            ps = pstats.Stats(pr, stream=sys.stdout)
+            ps.print_stats()
+            pr.disable()
+            pr.dump_stats('profile2.prof')
             return render(request, template_name,{'persona': id_usuario, 'Transacciones': Transacciones})   
         
         else:
+            ps = pstats.Stats(pr, stream=sys.stdout)
+            ps.print_stats()
+            pr.disable()
+            pr.dump_stats('profile2.prof')
             return  HttpResponseRedirect('/inicio')
     else:
+        ps = pstats.Stats(pr, stream=sys.stdout)
+        ps.print_stats()
+        pr.disable()
+        pr.dump_stats('profile2.prof')
         return  HttpResponseRedirect('/inicio')
 
 def validar_transaccion(CuentaOrigen, CuentaDestino, Monto):
