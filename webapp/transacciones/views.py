@@ -44,7 +44,7 @@ def RealizarTransacciones(request):
                 response_data['result'] = 'Error'
                 response_data['message'] = 'Campos Vacios, Por favor llenar todos los campos'
                 ps = pstats.Stats(pr, stream=sys.stdout)
-                ps.print_stats()
+                #ps.print_stats()
                 pr.disable()
                 pr.dump_stats('profile2.prof')
                 return HttpResponse(json.dumps(response_data), content_type="application/json")
@@ -61,7 +61,7 @@ def RealizarTransacciones(request):
                 response_data['result'] = 'Error'
                 response_data['message'] = 'Operacion Realizada Satisfactoriaente!!'
                 ps = pstats.Stats(pr, stream=sys.stdout)
-                ps.print_stats()
+                #ps.print_stats()
                 pr.disable()
                 pr.dump_stats('profile2.prof')
                 return HttpResponse(json.dumps(response_data), content_type="application/json")                
@@ -70,7 +70,7 @@ def RealizarTransacciones(request):
                 response_data['result'] = 'Error'
                 response_data['message'] = 'No se se tiene suficiente saldo para la transaccion'
                 ps = pstats.Stats(pr, stream=sys.stdout)
-                ps.print_stats()
+                #ps.print_stats()
                 pr.disable()
                 pr.dump_stats('profile2.prof')
                 return HttpResponse(json.dumps(response_data), content_type="application/json")
@@ -79,7 +79,7 @@ def RealizarTransacciones(request):
                 response_data['result'] = 'Error'
                 response_data['message'] = 'Error La cuenta Destino no existe'
                 ps = pstats.Stats(pr, stream=sys.stdout)
-                ps.print_stats()
+                #ps.print_stats()
                 pr.disable()
                 pr.dump_stats('profile2.prof')
                 return HttpResponse(json.dumps(response_data), content_type="application/json")
@@ -87,7 +87,7 @@ def RealizarTransacciones(request):
         response_data['result'] = 'Error'
         response_data['message'] = 'Error en Operacion'
         ps = pstats.Stats(pr, stream=sys.stdout)
-        ps.print_stats()
+        #ps.print_stats()
         pr.disable()
         pr.dump_stats('profile2.prof')
         return HttpResponse(json.dumps(response_data), content_type="application/json")
@@ -96,7 +96,7 @@ def RealizarTransacciones(request):
         response_data['result'] = 'Error'
         response_data['message'] = 'Error de Autenticacion'
         ps = pstats.Stats(pr, stream=sys.stdout)
-        ps.print_stats()
+        #ps.print_stats()
         pr.disable()
         pr.dump_stats('profile2.prof')
         return HttpResponse(json.dumps(response_data), content_type="application/json")
@@ -114,20 +114,20 @@ def VerHistorialCuenta(request):
             Transacciones   = Transaccion.objects.all().filter(CuentaOrigen=Cuenta)
             template_name   = 'transacciones/HistorialTransacciones.html'
             ps = pstats.Stats(pr, stream=sys.stdout)
-            ps.print_stats()
+            #ps.print_stats()
             pr.disable()
             pr.dump_stats('profile2.prof')
             return render(request, template_name,{'persona': id_usuario, 'Transacciones': Transacciones})   
         
         else:
             ps = pstats.Stats(pr, stream=sys.stdout)
-            ps.print_stats()
+            #ps.print_stats()
             pr.disable()
             pr.dump_stats('profile2.prof')
             return  HttpResponseRedirect('/inicio')
     else:
         ps = pstats.Stats(pr, stream=sys.stdout)
-        ps.print_stats()
+        #ps.print_stats()
         pr.disable()
         pr.dump_stats('profile2.prof')
         return  HttpResponseRedirect('/inicio')
