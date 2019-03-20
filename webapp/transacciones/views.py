@@ -103,6 +103,8 @@ def RealizarTransacciones(request):
 
 @csrf_exempt
 def VerHistorialCuenta(request):
+    pr = cProfile.Profile()
+    pr.enable()
     if request.method == 'POST':
         cuenta        = request.POST.get("cuenta")
         if request.session.get('usuario'):
