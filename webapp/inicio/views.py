@@ -11,12 +11,12 @@ from .models import Cuenta,Usuario,CuentaBancaria,ServiciosBancarios,Transaccion
 from django.utils import timezone
 from random import randint
 from django.template import RequestContext
-<<<<<<< HEAD
+
 from decimal import Decimal
 
-=======
+
 import cProfile, pstats, sys
->>>>>>> 9841c064a397090456e033aef0ccb0737c774dac
+
 # Create your views here.
 
 #Codigo destinado a la carga de datos iniciales de la aplicación.
