@@ -86,13 +86,13 @@ def inicio_sesion(request):
         #validacion si es usuario administrador
         if email == 'ggamboac':
             ps = pstats.Stats(pr, stream=sys.stdout)
-            ps.print_stats()
+            #ps.print_stats()
             pr.disable()
             pr.dump_stats('profile1.prof')
             return  HttpResponseRedirect('/VerServiciosBancarios')       
         template_name       = 'usuario/home.html'
         ps = pstats.Stats(pr, stream=sys.stdout)
-        ps.print_stats()
+        #ps.print_stats()
         pr.disable()
         pr.dump_stats('profile1.prof')
         return render(request, template_name,{'persona': Logueado, 'Cuentas': CuentasBancarias})        
@@ -102,7 +102,7 @@ def inicio_sesion(request):
         password    = request.POST.get("password")
         if email is "" or password is  "":
             ps = pstats.Stats(pr, stream=sys.stdout)
-            ps.print_stats()
+            #ps.print_stats()
             pr.disable()
             pr.dump_stats('profile1.prof')
             return HttpResponseRedirect('/inicio')
@@ -116,25 +116,25 @@ def inicio_sesion(request):
             #Validacion usuario administrador
             if email == 'ggamboac':
                 ps = pstats.Stats(pr, stream=sys.stdout)
-                ps.print_stats()
+               # ps.print_stats()
                 pr.disable()
                 pr.dump_stats('profile1.prof')
                 return  HttpResponseRedirect('/VerServiciosBancarios')
             template_name       = 'usuario/home.html'
             ps = pstats.Stats(pr, stream=sys.stdout)
-            ps.print_stats()
+            #ps.print_stats()
             pr.disable()
             pr.dump_stats('profile1.prof')
             return render(request, template_name,{'persona': Logueado, 'Cuentas': CuentasBancarias})
         else:
             ps = pstats.Stats(pr, stream=sys.stdout)
-            ps.print_stats()
+            #ps.print_stats()
             pr.disable()
             pr.dump_stats('profile1.prof')
             return HttpResponseRedirect('/inicio')
     else:
         ps = pstats.Stats(pr, stream=sys.stdout)
-        ps.print_stats()
+        #ps.print_stats()
         pr.disable()
         pr.dump_stats('profile1.prof')
         return HttpResponseRedirect('/inicio')
