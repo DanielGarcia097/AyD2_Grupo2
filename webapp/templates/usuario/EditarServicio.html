@@ -75,14 +75,6 @@
 								</ul>
 							</div>
 						</li>
-						<li>
-							<a href="#subPages3" data-toggle="collapse" class="collapsed"><i class="lnr lnr-chart-bars"></i> <span>Adm Usuarios</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages3" class="collapse ">
-								<ul class="nav">
-									<li><a href="/VerUsuarios" class="">Ver Usuarios</a></li>
-								</ul>
-							</div>
-						</li>							
 					</ul>
 				</nav>
 			</div>
@@ -96,54 +88,60 @@
 					<h3 class="page-title"> ADMINISTRADOR: {{persona.Nombre}} {{persona.Apellido}}</h3>
 					<div class="row">
 						<div class="col-md-12">
-							<!-- PANEL HEADLINE -->
-							<div class="panel panel-headline">
-								<div class="panel-body">
-									<!-- RECENT PURCHASES -->
-									<div class="panel">
-											<div class="panel-heading">
-												<h3 class="panel-title">Servicios Bancarios</h3>
-												<div class="right">
-													<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-													<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
-												</div>
-											</div>
-											<div class="panel-body no-padding">
-												<table class="table table-striped">
-													<thead>
-														<tr>
-															<th>Servicio</th>
-															<th>Usuario Administrador</th>															
-															<th>Cuenta Bancaria</th>
-														</tr>
-													</thead>
-													<tbody>
-														{% block title %}
-															{% for srv in servicios %}
-																<tr>
-																	<td><a href="/inicio">{{ srv.NombreServicio }}</a></td>
-																	<td>{{ srv.NumeroCuentaBancaria.UsuarioPropietario.usuario }}</td>
-																	<td>{{ srv.NumeroCuentaBancaria.NumeroCuentaBancaria }}</td>
-																	<td><a href="/EliminarServicio/{{srv.id}}" class="btn btn-danger">Eliminar</a></td>
-																	<td><a href="/EditarServicio/{{srv.id}}" class="btn btn-warning">Editar</a></td>
-																</tr>
-															{% endfor %}
-														{% endblock %}
-													</tbody>
-												</table>
-											</div>
-											<div class="panel-footer">
-												<div class="row">
-													<div class="col-md-6"><span class="panel-note"><i class="fa fa-clock-o"></i> Last 24 hours</span></div>
-													<div class="col-md-6 text-right"><a href="#" class="btn btn-primary">View All Purchases</a></div>
-												</div>
-											</div>
-										</div>
-										<!-- END RECENT PURCHASES -->
 
+							<!-- PANEL HEADLINE -->
+							<form id="FormularioServicios" class="panel panel-headline" action="/VerServiciosBancarios/" method="POST">{% csrf_token %}
+								<!-- INPUTS -->
+								{% block title %}
+								<div class="panel">
+									<div class="panel-heading">
+										<h3 class="panel-title">Administrar Servicios Bancarios</h3>
+									</div>
+									<div class="panel-body">
+										<br>
+										<a>Usuario Autenticacion de Administrador del Servicio Bancario<span class="badge"></span></a>
+										<br>
+										<br>					
+                                        <input readonly type="text" name="UsuarioAdmin"  class="form-control" placeholder="Example: AdminUSAC" value ="{{servicio.Usuario}}" >
+                                        <br>
+										<a>Identificación Servicio<span class="badge"></span></a>
+										<br>
+										<br>
+										<input readonly type="text" name="Id"  class="form-control" placeholder="Example: Ciudad Universitaria"value = "{{servicio.id}}">
+                                        <br>
+										<a>Numero de Cuenta<span class="badge"></span></a>
+										<br>
+										<br>
+										<input readonly type="text" name="NumeroCuenta"  class="form-control" placeholder="Example: Ciudad Universitaria"value = "{{servicio.NumeroCuentaBancaria.NumeroCuentaBancaria}}">							
+										<br>
+										<a>Nombre Del Servicio Bancario<span class="badge"></span></a>
+										<br>
+										<br>					
+                                        <input type="text" name="NombreServicio"  class="form-control" placeholder="Example: Pagos Usac" value = "{{servicio.NombreServicio}}">
+                                        <br>
+										<a>Fecha Inicio<span class="badge"></span></a>
+										<br>
+										<br>
+										{{servicio.FechaInicio}}					
+										<input input type="date"   name="FechaInicio"  class="form-control" placeholder="Example: Pagos Usac" value = "">																				
+										<br>
+										<a>Fecha Fin<span class="badge"></span></a>
+										<br>
+										<br>
+										{{servicio.FechaInicio}}					
+										<input input type="date"   name="FechaFin"  class="form-control" placeholder="Example: Pagos Usac" value = "{{servicio.FechaFin}}">			
+                                        <br>
+                                        <br>							
+										<button type="submit" class="btn btn-primary btn-lg btn-block">Guardar Servicio Bancario</button>
+									</div>
+									{% endblock %}
 								</div>
-							</div>
+								<!-- END INPUTS -->
+							</form>
 							<!-- END PANEL HEADLINE -->
+
+
+
 						</div>
 					</div>
 				</div>

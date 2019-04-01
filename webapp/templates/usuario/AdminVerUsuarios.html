@@ -74,15 +74,16 @@
 									<li><a href="/AgregarCuentaMostrarTemplate" class="">Agregar Cuentas</a></li>
 								</ul>
 							</div>
-						</li>
-						<li>
+                        </li>		
+                        <li>
 							<a href="#subPages3" data-toggle="collapse" class="collapsed"><i class="lnr lnr-chart-bars"></i> <span>Adm Usuarios</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subPages3" class="collapse ">
 								<ul class="nav">
 									<li><a href="/VerUsuarios" class="">Ver Usuarios</a></li>
+									
 								</ul>
 							</div>
-						</li>							
+						</li>					
 					</ul>
 				</nav>
 			</div>
@@ -102,7 +103,7 @@
 									<!-- RECENT PURCHASES -->
 									<div class="panel">
 											<div class="panel-heading">
-												<h3 class="panel-title">Servicios Bancarios</h3>
+												<h3 class="panel-title">Usuarios en Sistema</h3>
 												<div class="right">
 													<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
 													<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
@@ -112,20 +113,29 @@
 												<table class="table table-striped">
 													<thead>
 														<tr>
-															<th>Servicio</th>
-															<th>Usuario Administrador</th>															
-															<th>Cuenta Bancaria</th>
+															<th>Usuario</th>
+															<th>Nombre</th>
+															<th>Apellido</th>															
+                                                            <th>Password</th>
+                                                            <th>Dirección</th>
+                                                            <th>Telefono</th>
+                                                            <th>Fecha Creacion</th>
+                                                            <th>Fecha Fin</th>															
 														</tr>
 													</thead>
 													<tbody>
 														{% block title %}
-															{% for srv in servicios %}
+															{% for cts in usuarios %}
 																<tr>
-																	<td><a href="/inicio">{{ srv.NombreServicio }}</a></td>
-																	<td>{{ srv.NumeroCuentaBancaria.UsuarioPropietario.usuario }}</td>
-																	<td>{{ srv.NumeroCuentaBancaria.NumeroCuentaBancaria }}</td>
-																	<td><a href="/EliminarServicio/{{srv.id}}" class="btn btn-danger">Eliminar</a></td>
-																	<td><a href="/EditarServicio/{{srv.id}}" class="btn btn-warning">Editar</a></td>
+																	<td><a href="/inicio">{{ cts.usuario }}</a></td>
+																	<th>{{ cts.Nombre }}</th>
+																	<th>{{ cts.Apellido }}</th>																	
+                                                                    <td>{{ cts.password }}</td>
+                                                                    <td>{{ cts.direccion }}</td>
+                                                                    <td>{{ cts.telefono }}</td>
+                                                                    <td>{{ cts.Fecha_Creacion }}</td>
+																	<td>{{ cts.FechaFin}}</td>
+																	<td><a href="/EliminarUsuario/{{cts.id}}" class="btn btn-danger">Eliminar</a></td>						
 																</tr>
 															{% endfor %}
 														{% endblock %}

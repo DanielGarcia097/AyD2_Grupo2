@@ -2,7 +2,7 @@ from django.conf.urls import url
 from inicio.views import carga_datos
 from inicio.views import inicio
 from transacciones.views import inicio_transacciones,RealizarTransacciones,HistorialTransacciones,VerHistorialCuenta,PracticaAnalisis
-from usuario.views import AdministrarServicios, AgregarServicio, VerServiciosBancarios, AgregarCuntasBancarias,VerCuentasBancarias,AgregarCuentaMostrarTemplate
+from usuario.views import EliminarUsuario,EliminarServicio,EditarServicio,EliminarCuenta,EditarCuenta,VerUsuarios,AdministrarServicios, AgregarServicio, VerServiciosBancarios, AgregarCuntasBancarias,VerCuentasBancarias,AgregarCuentaMostrarTemplate
 #from transacciones import views
 
 
@@ -21,6 +21,12 @@ urlpatterns = [
     url('VerServiciosBancarios/$', VerServiciosBancarios),
     url('AgregarCuntasBancarias/$', AgregarCuntasBancarias),
     url('VerCuentasBancarias/$', VerCuentasBancarias),
+    url('VerUsuarios/$', VerUsuarios),
     url('AgregarCuentaMostrarTemplate/$', AgregarCuentaMostrarTemplate),
+    url('EditarCuenta/(?P<id>\d+)$', EditarCuenta),
+    url('EliminarCuenta/(?P<id>\d+)$', EliminarCuenta),
+    url('EditarServicio/(?P<id>\d+)$', EditarServicio),
+    url('EliminarServicio/(?P<id>\d+)$', EliminarServicio),
+    url('EliminarUsuario/(?P<id>\d+)$', EliminarUsuario),
 
 ]

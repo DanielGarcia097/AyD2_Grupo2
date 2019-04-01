@@ -10,7 +10,8 @@ from random import randint
 # Create your views here.
 
 
-
+#EDICIÓN DE SERVICIO
+#--PETICIÓN POST Y LISTA DE SERVICIOS
 def AdministrarServicios(request):
     if request.session.get('usuario'):
         username        = request.session['usuario']
@@ -32,6 +33,26 @@ def AgregarCuentaMostrarTemplate(request):
     else:
         return  HttpResponseRedirect('/inicio')
 
+def VerServiciosBancarios(request):
+    if request.session.get('usuario'):
+        if request.method == 'POST':
+            id_servicio       = request.POST.get("Id")
+            servicio          = ServiciosBancarios.objects.get(id=id_servicio)
+            servicio.NombreServicio                     = request.POST.get("NombreServicio")
+            servicio.FechaInicio                        = request.POST.get("FechaInicio")
+            servicio.FechaFin                           = request.POST.get("FechaFin")
+            servicio.save()
+            return  HttpResponseRedirect('/VerServiciosBancarios')
+            
+        username        = request.session['usuario']
+        id_usuario      = Usuario.objects.get(usuario=username)
+        servicios   = ServiciosBancarios.objects.all().filter()
+        if username == 'ggamboac':
+            template_name       = 'usuario/AdminVerServicios.html'
+            return render(request, template_name, {'persona': id_usuario, 'servicios': servicios})        
+        return  HttpResponseRedirect('/inicio')
+    else:
+        return  HttpResponseRedirect('/inicio')
 
 def AgregarServicio(request):
     if request.session.get('usuario'):
@@ -54,6 +75,36 @@ def AgregarServicio(request):
             return  HttpResponseRedirect('/AdministrarServicios')
 
         return  HttpResponseRedirect('/AdministrarServicios')    
+    else:
+        return  HttpResponseRedirect('/inicio')
+
+#EDICIÓN DE SERVICIO
+#--PETICIÓN GET
+def EditarServicio(request,id):
+    if request.session.get('usuario'):
+        username        = request.session['usuario']
+        id_usuario      = Usuario.objects.get(usuario=username)
+        id_servicio       = id
+        servicio          = ServiciosBancarios.objects.get(id=id_servicio)
+        if username == 'ggamboac':
+            template_name       = 'usuario/EditarServicio.html'
+            return render(request, template_name, {'persona': id_usuario, 'servicio': servicio})        
+        return  HttpResponseRedirect('/inicio')
+    else:
+        return  HttpResponseRedirect('/inicio')
+
+#ELIMINACIÓN DE CUENTA 
+#--PETICIÓN GET
+def EliminarServicio(request,id):
+    if request.session.get('usuario'):
+        username        = request.session['usuario']
+        id_usuario      = Usuario.objects.get(usuario=username)
+        id_servicio       = id
+        servicio          = ServiciosBancarios.objects.get(id=id_servicio)
+        if username == 'ggamboac':
+            servicio.delete()
+            return  HttpResponseRedirect('/VerServiciosBancarios')      
+        return  HttpResponseRedirect('/inicio')
     else:
         return  HttpResponseRedirect('/inicio')
 
@@ -82,11 +133,44 @@ def AgregarCuntasBancarias(request):
     else:
         return  HttpResponseRedirect('/inicio')
 
+def VerUsuarios(request):
+    if request.session.get('usuario'):
+        username        = request.session['usuario']
+        id_usuario      = Usuario.objects.get(usuario=username)
+        usuarios   = Usuario.objects.all().filter()
+        if username == 'ggamboac':
+            template_name       = 'usuario/AdminVerUsuarios.html'
+            return render(request, template_name, {'persona': id_usuario, 'usuarios': usuarios})        
+        return  HttpResponseRedirect('/inicio')
+    else:
+        return  HttpResponseRedirect('/inicio')
 
+#ELIMINACIÓN DE USUARIO 
+#--PETICIÓN GET
+def EliminarUsuario(request,id):
+    if request.session.get('usuario'):
+        username        = request.session['usuario']
+        usuario      = Usuario.objects.get(id=id)
+        if username == 'ggamboac':
+            usuario.delete()
+            return  HttpResponseRedirect('/AdminVerUsuarios')      
+        return  HttpResponseRedirect('/inicio')
+    else:
+        return  HttpResponseRedirect('/inicio')
 
-
+#PETICIÓN POST DE LA EDICIÓN DE LA CUENTA 
+#RENDER DE LA LISTA DE CUENTAS BANCARIAS
 def VerCuentasBancarias(request):
     if request.session.get('usuario'):
+        if request.method == 'POST':
+            id_cuenta = request.POST.get("numero_cuenta")
+            cuenta = CuentaBancaria.objects.get(NumeroCuentaBancaria=id_cuenta)
+            cuenta.saldo           = request.POST.get("saldo")
+            cuenta.FechaInicio     = request.POST.get("fecha_inicio")
+            cuenta.FechaFin        = request.POST.get("fecha_fin")
+            cuenta.save()
+            return  HttpResponseRedirect('/VerCuentasBancarias')
+
         username        = request.session['usuario']
         id_usuario      = Usuario.objects.get(usuario=username)
         cuentas   = CuentaBancaria.objects.all().filter()
@@ -97,18 +181,37 @@ def VerCuentasBancarias(request):
     else:
         return  HttpResponseRedirect('/inicio')
 
-
-def VerServiciosBancarios(request):
+#EDICIÓN DE CUENTA
+#--PETICIÓN GET
+def EditarCuenta(request,id):
     if request.session.get('usuario'):
         username        = request.session['usuario']
         id_usuario      = Usuario.objects.get(usuario=username)
-        servicios   = ServiciosBancarios.objects.all().filter()
+        id_cuenta       = id
+        cuenta          = CuentaBancaria.objects.get(NumeroCuentaBancaria=id_cuenta)
         if username == 'ggamboac':
-            template_name       = 'usuario/AdminVerServicios.html'
-            return render(request, template_name, {'persona': id_usuario, 'servicios': servicios})        
+            template_name       = 'usuario/EditarCuenta.html'
+            return render(request, template_name, {'persona': id_usuario, 'cuenta': cuenta})        
         return  HttpResponseRedirect('/inicio')
     else:
         return  HttpResponseRedirect('/inicio')
+
+#ELIMINACIÓN DE CUENTA 
+#--PETICIÓN GET
+def EliminarCuenta(request,id):
+    if request.session.get('usuario'):
+        username        = request.session['usuario']
+        id_usuario      = Usuario.objects.get(usuario=username)
+        id_cuenta       = id
+        cuenta          = CuentaBancaria.objects.get(NumeroCuentaBancaria=id_cuenta)
+        if username == 'ggamboac':
+            cuenta.delete()
+            return  HttpResponseRedirect('/VerCuentasBancarias')      
+        return  HttpResponseRedirect('/inicio')
+    else:
+        return  HttpResponseRedirect('/inicio')
+
+
 
 def CrearServicios(usuario, password, nombre, apellido, direccion, telefono):    
     srv1 = ServiciosBancarios()
