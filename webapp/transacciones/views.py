@@ -111,7 +111,7 @@ def VerHistorialCuenta(request):
             username        = request.session['usuario']
             id_usuario      = Usuario.objects.get(usuario=username)
             Cuenta          = CuentaBancaria.objects.all().filter(NumeroCuentaBancaria=cuenta).last()
-            Transacciones   = Transaccion.objects.all().filter(CuentaOrigen=Cuenta)
+            Transacciones   = Transaccion.objects.all().filter(CuentaOrigen=Cuenta)[:5]
             template_name   = 'transacciones/HistorialTransacciones.html'
             ps = pstats.Stats(pr, stream=sys.stdout)
             #ps.print_stats()

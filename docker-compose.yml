@@ -1,17 +1,277 @@
 
 version: "2"
+
 services:
+
   db:
     image: mongo
     ports:
       - "27017:27017"
-  web:
+
+      
+  app1: # Service 1  
      build: ./webapp
      command: python manage.py runserver 0.0.0.0:8000 
      volumes: 
        - ./webapp:/webapp
-     ports: 
-       - "8000:8000"
      depends_on:
-       - db 
+       - db    
+     ports: 
+       - 8001:8000
+     container_name: 'app1'  # Name of the container  
+  
+  app2: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8002:8000
+     container_name: 'app2'  # Name of the container  
+  
+  app3: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8003:8000
+     container_name: 'app3'  # Name of the container  
+
+  app4: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8004:8000
+     container_name: 'app4'  # Name of the container  
+
+
+  app5: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8005:8000
+     container_name: 'app5'  # Name of the container  
+
+
+  app6: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8006:8000
+     container_name: 'app6'  # Name of the container  
+
+
+
+  app7: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8007:8000
+     container_name: 'app7'  # Name of the container  
+
+
+  app8: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8008:8000
+     container_name: 'app8'  # Name of the container  
+
+  app9: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8009:8000
+     container_name: 'app9'  # Name of the container
+
+
+  app10: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8010:8000
+     container_name: 'app10'  # Name of the container     
+
+  app11: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8011:8000
+     container_name: 'app11'  # Name of the container     
+
+
+  app12: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8012:8000
+     container_name: 'app12'  # Name of the container     
+
+
+  app13: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8013:8000
+     container_name: 'app13'  # Name of the container     
+     
+
+  app14: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8014:8000
+     container_name: 'app14'  # Name of the container     
+
+  app15: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8015:8000
+     container_name: 'app15'  # Name of the container     
+
+  app16: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8016:8000
+     container_name: 'app16'  # Name of the container     
+
+  app17: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8017:8000
+     container_name: 'app17'  # Name of the container     
+
+  app18: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8018:8000
+     container_name: 'app18'  # Name of the container     
+
+
+  app19: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8019:8000
+     container_name: 'app19'  # Name of the container     
+
+
+  app20: # Service 2  
+     build: ./webapp
+     command: python manage.py runserver 0.0.0.0:8000 
+     volumes: 
+       - ./webapp:/webapp
+     depends_on:
+       - db    
+     ports: 
+       - 8020:8000
+     container_name: 'app20'  # Name of the container     
+
+
+  front:
+    image: strm/nginx-balancer
+    container_name: load-balancers
+    ports:
+      - "80:8080"
+    links:
+      - app1
+      - app2
+      - app3
+      - app4
+      - app5
+      - app6
+      - app7
+      - app8
+      - app9
+      - app10
+      - app11
+      - app12
+      - app13
+      - app14
+      - app15
+      - app16
+      - app17
+      - app18
+      - app19
+      - app20     
+
+    environment:
+      - "NODES=app1:8000 app2:8000 app3:8000 app4:8000 app5:8000 app6:8000 app7:8000 app8:8000 app9:8000 app10:8000 app11:8000 app12:8000 app13:8000 app14:8000 app15:8000 app16:8000 app17:8000 app18:8000 app19:8000 app20:8000"
+
+
+
+
 
