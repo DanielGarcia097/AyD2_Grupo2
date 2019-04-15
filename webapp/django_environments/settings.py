@@ -26,7 +26,7 @@ SECRET_KEY = 'z_+$s+iqes&68#6yg%e!zazl-=+^$h21h95-p8p(a66i0)!f&z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.73.93.202','localhost','35.185.6.88']
+ALLOWED_HOSTS = ['34.73.93.202','localhost','35.185.6.88','web']
 
 
 from unipath import Path
@@ -142,7 +142,7 @@ STATICFILES_DIRS = [
     RUTA_PROYECTO.child('assets'),
 ]
 
-INTERNAL_IPS = ['34.73.93.202','localhost','35.185.6.88']
+INTERNAL_IPS = ['34.73.93.202','localhost','35.185.6.88','web']
 
 DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.versions.VersionsPanel',

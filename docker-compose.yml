@@ -1,17 +1,29 @@
 
 version: "2"
 services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx1
+    ports:
+      - "80:8000"
+    volumes:
+      - ./webapp:/webapp
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./config/nginx:/etc/nginx/sites-available
+      - ./config/nginx:/etc/nginx/sites-enabled
+    depends_on:
+        - web
   db:
     image: mongo
     ports:
       - "27017:27017"
   web:
      build: ./webapp
-     command: python manage.py runserver 0.0.0.0:8000 
+     command: bash -c "python manage.py makemigrations & python manage.py migrate & gunicorn django_environments.wsgi:application -b 0.0.0.0:8000 --workers 3"
      volumes: 
        - ./webapp:/webapp
-     ports: 
-       - "8000:8000"
+     expose: 
+       - "8000"
      depends_on:
        - db 
 
